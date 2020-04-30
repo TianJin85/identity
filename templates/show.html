@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1-edb203c114.10.2.js"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <img id="img" src="{{url_for('static', filename=filepath)}}" style="display: inline">
+            <label>身份证号码</label><input id="number" style="width: 200px;">
+            <button type="button" id="but">识别身份证号码</button>
+        </div>
+    </div>
+
+    <script>
+    $("#but").click(function () {
+        var path = $("#img").attr("src");
+
+        $.post("discern",{
+                path: path
+            },
+            function(data){
+
+                $("#number").val(data["data"])
+                }
+        )
+    });
+    </script>
+</body>
+</html>
