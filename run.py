@@ -9,7 +9,6 @@
 import time
 from datetime import datetime
 
-import dlib
 from flask import Flask, template_rendered, render_template, request, redirect, url_for, jsonify
 import numpy as np
 import cv2
@@ -62,8 +61,6 @@ def savefile():
             filepath = "images/" + filename
             data = {"filepath": filepath}
             # return render_template('show.html', filepath=filepath)
-            detector = dlib.get_frontal_face_detector()
-            predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
             # cv2读取图像
             img = cv2.imread('./static/'+filepath)
@@ -72,12 +69,9 @@ def savefile():
             img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
             # 人脸数rects
-            rects = detector(img_gray, 0)
-            print(len(rects))
-            if len(rects) > 0:
-                return jsonify(data)
-            else:
-                return "没有获取到人脸请重新上传"
+
+            return jsonify(data)
+
         else:
             return "暂时不能识别此图片类型"
     else:
