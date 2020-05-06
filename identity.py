@@ -100,7 +100,7 @@ def ocrIdCard(imgPath, realId=""):
     idImg = detect(img)
     image = Image.fromarray(idImg)
 
-    result = pytesseract.image_to_string(image, lang='chi_sim')
+    result = pytesseract.image_to_string(image,)
     return result
 
 

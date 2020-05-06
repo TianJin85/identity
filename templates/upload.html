@@ -38,7 +38,10 @@
                         alert("文件不能为空")
                     }else if(returndata == "暂时不能识别此图片类型"){
                         alert("暂时不能识别此图片类型")
-                    }else {
+                    }else if (returndata == "没有获取到人脸请重新上传"){
+                        alert(returndata)
+                    }
+                    else {
                          $("#form").css("display","none")
                          $("#img img").attr("src", "static"+"\\"+ returndata["filepath"])
                          $("#img img").css("display", "block")
@@ -51,7 +54,6 @@
         　　    }
             });
         });
-
         // 识别图片
         $("#submit").click(function () {
                 var path = $("#images").attr("src");
