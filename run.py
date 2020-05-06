@@ -8,7 +8,7 @@
 """
 import time
 from datetime import datetime
-from flask import Flask, template_rendered, render_template, request, redirect, url_for
+from flask import Flask, template_rendered, render_template, request, redirect, url_for, jsonify
 import numpy as np
 import cv2
 import os
@@ -57,7 +57,9 @@ def savefile():
             # number = ocrIdCard('./static/images/' + str(int(time.time())) + "." + suffix, "522228199610032811")
             # data = {"number": number}
             filepath = "images/" + filename
-            return render_template('show.html', filepath=filepath)
+            data = {"filepath": filepath}
+            # return render_template('show.html', filepath=filepath)
+            return jsonify(data)
         else:
             return "暂时不能识别此图片类型"
     else:
@@ -79,10 +81,17 @@ def show():
 @app.route('/discern', methods=["POST"])
 def discern():
     path = request.form.to_dict()
-    filepath = "."+ path["path"]
+    filepath = "./"+ path["path"]
     number = ocrIdCard(filepath, "522228199610032811")
     print(number)
+
     return {"data": number}
+
+
+@app.route('/upload', methods=["GET"])
+def upload():
+
+    return render_template("upload.html")
 
 
 if __name__ == '__main__':
