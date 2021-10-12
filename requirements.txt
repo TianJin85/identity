@@ -1,5 +1,5 @@
 Flask==1.1.2
 dlib==19.5.1
 numpy==1.18.3
-opencv-python==3.4.3.18
+opencv-python==3.4.7.28
 pytesseract==0.3.4
